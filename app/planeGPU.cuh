@@ -1,0 +1,4 @@
+#ifndef LAB_4_PLANEGPU_CUH
+#define LAB_4_PLANEGPU_CUH
+
+#endif //LAB_4_PLANEGPU_CUH

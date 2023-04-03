@@ -1,12 +1,12 @@
 #include <iostream>
 #include <random>
 #include <chrono>
-#include "MonteCarlo.cuh"
-#include "DeviceInfo.cuh"
+#include "app/MonteCarlo.cuh"
+#include "app/DeviceInfo.cuh"
 
 
 int main() {
-    const long int n_iter = 1000000;
+    const long int n_iter = 10000000;
     DeviceInfo::getCudaDeviceInfo();
 
     Point points[] = {
@@ -29,8 +29,11 @@ int main() {
     auto t1 = std::chrono::high_resolution_clock::now();
     double cpu_res = calculateVolumeCPU(planes, n_iter);
     auto t2 = std::chrono::high_resolution_clock::now();
-    std::cout << "Time: " << ((std::chrono::duration<double>) (t2 - t1)).count() << std::endl;
+    std::cout << "CPU Time: " << ((std::chrono::duration<double>) (t2 - t1)).count() << std::endl;
     std::cout << "CPU Result: " << cpu_res << std::endl;
+
+    double gpu_res = calculateVolumeGPU(planes, n_iter);
+    std::cout << "GPU Result: " << gpu_res << std::endl;
 
     return 0;
 }
